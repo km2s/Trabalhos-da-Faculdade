@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+        textarea {
+            width: 100%;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formulário de Cadastro</h2>
+        <form>
+            <table>
+                <tr>
+                    <th colspan="2">Dados Pessoais</th>
+                </tr>
+                <tr>
+                    <td>Nome:</td>
+                    <td><input type="text" name="nome" required></td>
+                </tr>
+                <tr>
+                    <td>Sobrenome:</td>
+                    <td><input type="text" name="sobrenome" required></td>
+                </tr>
+                <tr>
+                    <td>Idade:</td>
+                    <td><input type="number" name="idade" required></td>
+                </tr>
+                <tr>
+                    <td>Gênero:</td>
+                    <td>
+                        <input type="radio" name="genero" value="masculino" required> Masculino
+                        <input type="radio" name="genero" value="feminino" required> Feminino
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td><input type="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>Telefone:</td>
+                    <td><input type="tel" name="telefone" required></td>
+                </tr>
+                <tr>
+                    <td>Endereço:</td>
+                    <td><input type="text" name="endereco" required></td>
+                </tr>
+                <tr>
+                    <td>Cidade:</td>
+                    <td><input type="text" name="cidade" required></td>
+                </tr>
+                <tr>
+                    <td>Estado:</td>
+                    <td>
+                        <select name="estado" required>
+                            <option value="">Selecione...</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="ES">Espírito Santo</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>País:</td>
+                    <td>
+                        <select name="pais" size="4" required>
+                            <option value="brasil">Brasil</option>
+                            <option value="argentina">Argentina</option>
+                            <option value="eua">Estados Unidos</option>
+                            <option value="portugal">Portugal</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Interesses:</td>
+                    <td>
+                        <input type="checkbox" name="interesses" value="esportes"> Esportes
+                        <input type="checkbox" name="interesses" value="musica"> Música
+                        <input type="checkbox" name="interesses" value="viagem"> Viagem
+                        <input type="checkbox" name="interesses" value="tecnologia"> Tecnologia
+                    </td>
+                </tr>
+                <tr>
+                    <td>Descrição:</td>
+                    <td><textarea name="descricao" rows="4" required></textarea></td>
+                </tr>
+                <tr>
+                    <td>Senha:</td>
+                    <td><input type="password" name="senha" required></td>
+                </tr>
+                <tr>
+                    <td>Confirme a Senha:</td>
+                    <td><input type="password" name="confirma_senha" required></td>
+                </tr>
+                <tr>
+                    <td>Website:</td>
+                    <td><input type="url" name="website"></td>
+                </tr>
+                <tr>
+                    <td>Data de Nascimento:</td>
+                    <td><input type="date" name="data_nascimento" required></td>
+                </tr>
+                <tr>
+                    <td>Cor Favorita:</td>
+                    <td><input type="color" name="cor_favorita"></td>
+                </tr>
+                <tr>
+                    <td>Salário:</td>
+                    <td><input type="range" name="salario" min="1000" max="10000" step="500"></td>
+                </tr>
+                <tr>
+                    <td>Arquivo:</td>
+                    <td><input type="file" name="arquivo"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Cadastrar">
+                        <input type="reset" value="Limpar">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
