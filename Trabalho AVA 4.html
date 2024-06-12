@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Validação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            background: #fff;
+            padding: 45px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 0.875em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="formulario">
+        <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome">
+            <span class="error" id="nome-error">O nome completo deve ter no mínimo 15 caracteres.</span>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="email-error">O e-mail deve ser válido e ter pelo menos 10 caracteres.</span>
+        </div>
+        <div class="form-group">
+            <label for="dataNascimento">Data de Nascimento</label>
+            <input type="date" id="dataNascimento" name="dataNascimento">
+            <span class="error" id="dataNascimento-error">Por favor, insira uma data válida.</span>
+        </div>
+        <div class="form-group">
+            <label for="sexo">Sexo</label>
+            <select id="sexo" name="sexo">
+                <option value="">Selecione</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Masculino">Masculino</option>
+            </select>
+            <span class="error" id="sexo-error">Por favor, selecione um sexo.</span>
+        </div>
+        <div class="form-group">
+            <label for="estadoCivil">Estado Civil</label>
+            <select id="estadoCivil" name="estadoCivil">
+                <option value="">Selecione</option>
+                <option value="Solteiro">Solteiro(a)</option>
+                <option value="Casado">Casado(a)</option>
+                <option value="Outros">Outros</option>
+            </select>
+            <span class="error" id="estadoCivil-error">Por favor, selecione um estado civil.</span>
+        </div>
+        <div class="form-group">
+            <label for="interesses">Áreas de Interesse</label>
+            <select id="interesses" name="interesses" multiple>
+                <option value="Analise">Análise</option>
+                <option value="BancoDeDados">Banco de Dados</option>
+                <option value="Desenvolvimento">Desenvolvimento</option>
+                <option value="EngenhariaDeSoftware">Engenharia de Software</option>
+                <option value="RedesDeComputadores">Redes de Computadores</option>
+            </select>
+        </div>
+        <button type="submit">Enviar</button>
+        <div id="mensagem" class="error"></div>
+    </form>
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let valid = true;
+            let nome = document.getElementById('nome').value;
+            let email = document.getElementById('email').value;
+            let dataNascimento = document.getElementById('dataNascimento').value;
+            let sexo = document.getElementById('sexo').value;
+            let estadoCivil = document.getElementById('estadoCivil').value;
+            let mensagem = document.getElementById('mensagem');
+
+            // Reset error messages
+            document.getElementById('nome-error').style.display = 'none';
+            document.getElementById('email-error').style.display = 'none';
+            document.getElementById('dataNascimento-error').style.display = 'none';
+            document.getElementById('sexo-error').style.display = 'none';
+            document.getElementById('estadoCivil-error').style.display = 'none';
+            mensagem.style.display = 'none';
+
+            // Validation checks
+            if (nome.length < 15) {
+                document.getElementById('nome-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (email.length < 10 || !email.includes('@') || !email.includes('.')) {
+                document.getElementById('email-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!dataNascimento) {
+                document.getElementById('dataNascimento-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!sexo) {
+                document.getElementById('sexo-error').style.display = 'block';
+                valid = false;
+            }
+
+            if (!estadoCivil) {
+                document.getElementById('estadoCivil-error').style.display = 'block';
+                valid = false;
+            } else if (estadoCivil === 'Solteiro' && dataNascimento) {
+                let birthDate = new Date(dataNascimento);
+                let age = new Date().getFullYear() - birthDate.getFullYear();
+                if (new Date().getMonth() < birthDate.getMonth() || 
+                    (new Date().getMonth() === birthDate.getMonth() && new Date().getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                if (age < 15) {
+                    document.getElementById('dataNascimento-error').style.display = 'block';
+                    valid = false;
+                }
+            }
+
+            if (valid) {
+                mensagem.style.color = 'green';
+                mensagem.textContent = 'Dados enviados com sucesso!';
+                mensagem.style.display = 'block';
+            } else {
+                mensagem.textContent = 'Por favor, corrija os erros no formulário.';
+                mensagem.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
